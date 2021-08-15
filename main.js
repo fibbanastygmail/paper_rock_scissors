@@ -1,8 +1,27 @@
 
 let pScore=0;
 let cScore=0;
+let round = 0;
 let playerSelection;
 let computer;
+
+let playerDiv = document.querySelector(".playerSelect");
+let computerDiv = document.querySelector(".computerSelect");
+let roundDiv = document.querySelector(".round");
+let playerScoreDiv = document.querySelector(".playerScore");
+let computerScoreDiv = document.querySelector(".computerScore");
+let resultDiv = document.querySelector(".result");        
+let buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) =>{
+
+button.addEventListener('click', () =>{
+    //console.log(button.id)
+    playerSelection=button.id;
+    
+    console.log(playRound());
+  });
+});
 
 function computerPlay() {
      selection = Math.random();
@@ -20,17 +39,23 @@ function computerPlay() {
 };
 
 function playRound(){
+    let result = "";
+    
     
     computer= computerPlay()
-    playerSelection = prompt("paper, rock, scissors?").toLowerCase()
-    console.log("You Selected: " + playerSelection);
-    console.log("Computer Selected: " + computer);
+    round++;
+
+    
+    
+    //playerSelection = prompt("paper, rock, scissors?").toLowerCase()
+    //console.log("You Selected: " + playerSelection);
+    //console.log("Computer Selected: " + computer);
 
 
      if(playerSelection===computer)
      { // console.log(playerSelection);
        // console.log(computer);
-       return  "Tie Game!"
+       result =  "Tie Game!"
       
      }
      else if((playerSelection==="rock" && computer ==="scissors") || 
@@ -41,16 +66,24 @@ function playRound(){
               //  console.log(computer);  
                // console.log(pScore);
               //  console.log(cScore);      
-       return  "You win! " + playerSelection + " beats " + computer 
+       result =  "You win! " + playerSelection + " beats " + computer 
        
 
      }
      else {
         cScore++
-         
-        return "You lose " + computer + " beats " + playerSelection
+        result = "You lose! " + computer + " beats " + playerSelection
+        
      }
+     resultDiv.textContent = result;
     
+        
+        playerDiv.textContent = "Player chooses " + playerSelection;
+        playerScoreDiv.textContent = "Player score " + pScore;
+
+        computerScoreDiv.textContent = "Computer score " + cScore;
+        computerDiv.textContent = "Computer chooses " + computer;
+        roundDiv.textContent = "Round " + round;
 }
 
 function game()
@@ -70,15 +103,5 @@ do{
         console.log("You lost")
     }
 }
-        
-game();
     
 
-
-
-
-
-//console.log(playRound(playerSelection,computer))
-
-//console.log(pScore);
-//console.log(cScore);

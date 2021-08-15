@@ -13,13 +13,15 @@ let computerScoreDiv = document.querySelector(".computerScore");
 let resultDiv = document.querySelector(".result");        
 let buttons = document.querySelectorAll('button');
 
+endGame();
+
 buttons.forEach((button) =>{
 
 button.addEventListener('click', () =>{
     //console.log(button.id)
     playerSelection=button.id;
-    
-    console.log(playRound());
+    endGame();
+    playRound();
   });
 });
 
@@ -27,30 +29,22 @@ function computerPlay() {
      selection = Math.random();
 
      if(selection <0.34){
-         computerSelection = "rock"
+         computerSelection = "rock";
      }
      else if(selection >=0.34 && selection <0.67){
-         computerSelection =  "paper"
+         computerSelection =  "paper";
      }
      else{
-         computerSelection = "scissors"
+         computerSelection = "scissors";
      }
-     return computerSelection
+     return computerSelection;
 };
 
 function playRound(){
-    let result = "";
-    
+   
     
     computer= computerPlay()
     round++;
-
-    
-    
-    //playerSelection = prompt("paper, rock, scissors?").toLowerCase()
-    //console.log("You Selected: " + playerSelection);
-    //console.log("Computer Selected: " + computer);
-
 
      if(playerSelection===computer)
      { // console.log(playerSelection);
@@ -71,8 +65,8 @@ function playRound(){
 
      }
      else {
-        cScore++
-        result = "You lose! " + computer + " beats " + playerSelection
+        cScore++;
+        result = "You lose! " + computer + " beats " + playerSelection;
         
      }
      resultDiv.textContent = result;
@@ -86,22 +80,48 @@ function playRound(){
         roundDiv.textContent = "Round " + round;
 }
 
-function game()
+function endGame()
 {
     
-do{
+
+    if(pScore>=5){
+        resultDiv.textContent="YOU WIN!!!"
+        playerDiv.textContent = "Hit refresh to play again";
+        playerScoreDiv.textContent = "";
+
+        computerScoreDiv.textContent = "";
+        computerDiv.textContent = "";
+        roundDiv.textContent = "You won in only " + round + "s";
+
+        buttons.forEach((button) =>{
+
+            button.removeEventListener('click', () =>{
+               
+              });
+            });
+        
+
+    }
+    else if (cScore>=5){
+        resultDiv.textContent="YOU LOSE!!!"
+        playerDiv.textContent = "Hit refresh to play again";
+        playerScoreDiv.textContent = "";
+
+        computerScoreDiv.textContent = "";
+        computerDiv.textContent = "";
+        roundDiv.textContent = "You lost in " + round + "s";
+
+        buttons.forEach((button) =>{
+
+            button.removeEventListener('click', () =>{
+               
+              });
+            });
+    }
+    else{
+
+    }
     
-    console.log(playRound())
-    console.log("Your Score: " + pScore);
-    console.log("Computer Score: " + cScore); 
-}
-    while (pScore < 5 && cScore < 5);
-    if(pScore===5){
-        console.log("You Win!!!")
-    }
-    else if (cScore===5){
-        console.log("You lost")
-    }
 }
     
 
